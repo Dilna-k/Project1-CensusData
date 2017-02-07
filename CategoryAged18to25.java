@@ -44,7 +44,7 @@ public class CategoryAged18to25 {
 				count++;
 
 			}
-			String nop = " NO. Of People doiing " + key + " are :  " + count;
+			String nop = " NO. Of People aged between 18 to 25 doing " + key + " are :  " + count;
 			context.write(new Text(" "), new Text(nop));
 
 		}
