@@ -36,7 +36,7 @@ public class TotalVoters {
 				
 				if(age1>=18)
 				{
-					context.write(new Text("null"), new Text(age1+""));
+					context.write(new Text("null"), new Text(age1+","+i));
 				}
 				
 			
@@ -46,13 +46,15 @@ public class TotalVoters {
 	public static class ReduceClass extends Reducer<Text, Text, Text, Text> {
 		public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
-			int count = 0;
+			int count = 0;int x=0;
 			for (Text val : values) {
-								
+							
+				String[] rec = val.toString().split(",");
+				x=Integer.parseInt(rec[1]);
 				count++;
 				
 			}
-			context.write(new Text(""), new Text("Total no. of Voters are "+count));
+			context.write(new Text(""), new Text("Total no. of Voters after "+x+" years are "+count)); 
 		}
 	}
 	
