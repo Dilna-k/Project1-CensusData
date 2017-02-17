@@ -119,7 +119,7 @@ public static void main(String[] args) throws Exception {
 	
 	
 	job.setJarByClass(PensionAnalysis.class);
-	job.setJobName("Reduce Side Join");
+	job.setJobName("Pension amount after x years.");
 	job.setMapperClass(MapClass.class);
 	job.setReducerClass(ReduceClass.class);
 	job.setNumReduceTasks(1);
