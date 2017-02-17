@@ -9,4 +9,4 @@ create table censusdata(age STRING,education STRING,maritalStatus STRING,gender 
 
 LOAD DATA LOCAL INPATH '/home/hduser/sample.dat' OVERWRITE INTO TABLE censusdata;
 
-select gender,sum(SUBSTR(income,12)) as sumofincome from censusdata group by gender;
+select gender,(sum(SUBSTR(income,12))/COUNT(gender)) as percapitaincome from censusdata group by gender;
