@@ -15,9 +15,6 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import DivorcePack.EducationDivorce.MapClass;
-import DivorcePack.EducationDivorce.ReduceClass;
-
 public class EducationDivorce {
 public static class MapClass extends Mapper <LongWritable,Text,Text,Text>{
 		
@@ -41,58 +38,57 @@ public static class ReduceClass extends Reducer<Text, Text, Text, Text>
 	public void reduce (Text key,Iterable<Text> values,Context context)throws IOException, InterruptedException 
 	{
 		int edu1=0,edu2=0,edu3=0,edu4=0,edu5=0,edu6=0,edu7=0,edu8=0,edu9=0,edu10=0,edu11=0,edu12=0;
-		int ledu=0;
+		
 		float total=0;
 		 for (Text val : values) 
 		 {
 			total++;
 			 String str=val.toString();
-			 String[] p=str.split(",");
-			 if(p[0].contains("10th grade"))
+			 if(str.contains("10th grade"))
 			 {
 				 edu1++;
 			 
-			 }else if(p[0].contains(" 11th grade"))
+			 }else if(str.contains(" 11th grade"))
 			{
 				 edu2++;
 			 }
-			 else if(p[0].contains(" 1st 2nd 3rd or 4th grade"))
+			 else if(str.contains(" 1st 2nd 3rd or 4th grade"))
 						{
 				 edu3++;
 						 }
-			 else if(p[0].contains(" 5th or 6th grade"))
+			 else if(str.contains(" 5th or 6th grade"))
 				{
 		 edu4++;
 				 }
-			 else if(p[0].contains(" 7th and 8th grade"))
+			 else if(str.contains(" 7th and 8th grade"))
 				{
 		 edu5++;
 				 }
-			 else if(p[0].contains(" 9th grade"))
+			 else if(str.contains(" 9th grade"))
 				{
 		 edu6++;
 				 } 
-			 else if(p[0].contains(" Associates degree-academic program"))
+			 else if(str.contains(" Associates degree-academic program"))
 				{
 		 edu7++;
 				 }
-			 else if(p[0].contains(" Bachelors degree(BA AB BS)"))
+			 else if(str.contains(" Bachelors degree(BA AB BS)"))
 				{
 		 edu8++;
 				 }
-			 else if(p[0].contains(" Doctorate degree(PhD EdD)"))
+			 else if(str.contains(" Doctorate degree(PhD EdD)"))
 				{
 		 edu9++;
 				 } 
-			 else if(p[0].contains(" High school graduate"))
+			 else if(str.contains(" High school graduate"))
 				{
 		 edu10++;
 				 } 
-			 else if(p[0].contains(" Masters degree(MA MS MEng MEd MSW MBA)"))
+			 else if(str.contains(" Masters degree(MA MS MEng MEd MSW MBA)"))
 				{
 		 edu11++;
 				 } 
-			 else if(p[0].contains(" Some college but no degree"))
+			 else if(str.contains(" Some college but no degree"))
 				{
 		 edu12++;
 				 } 
