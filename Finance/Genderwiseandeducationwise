@@ -2,11 +2,11 @@ create database census;
 
 use census;
 
-create table censusdata(age STRING,education STRING,maritalStatus STRING,gender STRING,taxFileStatus STRING,income STRING,parents STRING,countryOfBirth STRING,citizenship STRING,weeksworked STRING)
-  > row format delimited
+create table censustable(age STRING,education STRING,maritalStatus STRING,gender STRING,taxFileStatus STRING,income STRING,parents STRING,countryOfBirth STRING,citizenship STRING,weeksworked STRING)
+    > row format delimited
     > fields terminated by ','
     > stored as textfile;
+    
+LOAD DATA LOCAL INPATH '/home/hduser/censusdata' OVERWRITE INTO TABLE censustable;
 
-LOAD DATA LOCAL INPATH '/home/hduser/sample.dat' OVERWRITE INTO TABLE censusdata;
-
-select gender,education,(sum(SUBSTR(income,12))/(count(gender))) from censusdata group by gender,education;
+select gender,education,(sum(income)/(count(gender))) from censustable group by gender,education;
