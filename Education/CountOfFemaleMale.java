@@ -1,4 +1,4 @@
-package CountPack;
+package education;
 
 import java.io.IOException;
 
@@ -9,14 +9,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import CountPack.CountOfFemaleMale;
 
-public class CountOfFemaleMale {
-
+public class CountGenderEduc {
+	
 	public static class MapClass extends Mapper<LongWritable, Text, Text, Text> {
 
 		public void map(LongWritable Key, Text value, Context context) throws IOException, InterruptedException {
@@ -25,16 +23,14 @@ public class CountOfFemaleMale {
 			String edu = parts[1];
 
 			String gender = parts[3];
-			String[] MorF = gender.split(":");
-			String[] MorF2 = MorF[1].split(" ");
-			// String str=edu+","+gender;
-
-			context.write(new Text(edu), new Text(MorF2[2]));
+			
+			context.write(new Text(edu), new Text(gender));
 
 		}
 
 	}
-
+	
+	
 	public static class ReduceClass extends Reducer<Text, Text, Text, Text> {
 		public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 			int f1 = 0;
@@ -42,7 +38,7 @@ public class CountOfFemaleMale {
 
 			for (Text val : values) {
 				String s1 = val.toString();
-				if (s1.contains("Female")) {
+				if (s1.equals(" Female")) {
 					f1++;
 				} else {
 					m1++;
@@ -54,11 +50,17 @@ public class CountOfFemaleMale {
 			context.write(key, new Text("             "+female + "  " + male));
 		}
 	}
-
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf);
-		job.setJarByClass(CountOfFemaleMale.class);
+		job.setJarByClass(CountGenderEduc.class);
 		job.setJobName("Count of Female & Male based on education");
 		job.setMapperClass(MapClass.class);
 		job.setReducerClass(ReduceClass.class);
