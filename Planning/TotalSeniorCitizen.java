@@ -29,9 +29,8 @@ public class TotalSeniorCitizen {
 				int i=Integer.parseInt(x);
 				String[] str = value.toString().split(",");
 				String part1=str[0];
-				String[] p1=part1.split(" ");
 				
-				int age =Integer.parseInt(p1[1]);
+				int age =Integer.parseInt(part1);
 				
 				int age1=age+i;
 				
