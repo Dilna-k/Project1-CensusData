@@ -28,9 +28,8 @@ public class PensionAnalysis {
 				int i=Integer.parseInt(v);
 				String[] str = value.toString().split(",");
 				String part1=str[0];
-				String[] p1=part1.split(" ");
 				
-				int age =Integer.parseInt(p1[1]);
+				int age =Integer.parseInt(part1);
 				int age1=age+i;
 				if(age1>=60)
 				{
@@ -119,7 +118,7 @@ public static void main(String[] args) throws Exception {
 	
 	
 	job.setJarByClass(PensionAnalysis.class);
-	job.setJobName("Pension amount after x years.");
+	job.setJobName("Pension Amount after x years");
 	job.setMapperClass(MapClass.class);
 	job.setReducerClass(ReduceClass.class);
 	job.setNumReduceTasks(1);
