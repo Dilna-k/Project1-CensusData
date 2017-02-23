@@ -1,0 +1,12 @@
+create database census;
+
+use census;
+
+create table censustable(age STRING,education STRING,maritalStatus STRING,gender STRING,taxFileStatus STRING,income STRING,parents STRING,countryOfBirth STRING,citizenship STRING,weeksworked STRING)
+    > row format delimited
+    > fields terminated by ','
+    > stored as textfile;
+
+LOAD DATA LOCAL INPATH '/home/hduser/censusdata' OVERWRITE INTO TABLE censustable;
+
+select education,gender,count(gender) as count from censustable group by education,gender;
