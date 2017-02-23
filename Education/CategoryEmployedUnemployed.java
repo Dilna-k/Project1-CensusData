@@ -1,4 +1,4 @@
-package CategoryEmployedUnemployed;
+package education;
 
 import java.io.IOException;
 
@@ -9,13 +9,11 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 
-public class CategoryEmployedUnemployed {
-
+public class EmployUnemployEduc {
 	public static class MapClass extends Mapper<LongWritable, Text, Text, Text> {
 
 		public void map(LongWritable Key, Text value, Context context) throws IOException, InterruptedException {
@@ -38,9 +36,8 @@ public class CategoryEmployedUnemployed {
 			for(Text val : values)
 			{
 				String str=val.toString();
-				String[] s1=str.split(":");
-				String weekw=s1[1];
-				if(weekw.contains(" 0}"))
+				int emp=Integer.parseInt(str);
+				if(emp==0)
 				{
 					unemploy++;
 				}
@@ -52,13 +49,11 @@ public class CategoryEmployedUnemployed {
 		}
 	}
 	
-	
-
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf);
-		job.setJarByClass(CategoryEmployedUnemployed.class);
-		job.setJobName("Count of Employed and employed based on education");
+		job.setJarByClass(EmployUnemployEduc.class);
+		job.setJobName("Count of Employed and Unemployed based on education");
 		job.setMapperClass(MapClass.class);
 		job.setReducerClass(ReduceClass.class);
 		job.setNumReduceTasks(1);
@@ -69,4 +64,5 @@ public class CategoryEmployedUnemployed {
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 
 	}
+
 }
