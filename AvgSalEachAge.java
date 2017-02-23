@@ -29,12 +29,10 @@ public static class MapClass extends Mapper <LongWritable,Text,Text,Text>{
 			String record=value.toString();
 			String[] str=record.split(",");
 		
-			String[] sp=str[5].split(":");
-			String[] sp1=str[0].split(":");
-			 String[] p1=sp1[1].split(" ");
-			
-				
-					context.write(new Text("null"), new Text(sp[1]+","+p1[1]));
+			String salary=str[5];
+			String age=str[0];
+		
+			context.write(new Text("null"), new Text(salary+","+age));
 				
 			
 		}
