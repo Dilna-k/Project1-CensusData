@@ -21,8 +21,7 @@ public class TotalScholarship2 {
 			//without x value
 				String[] str = value.toString().split(",");
 				String part1=str[0];
-				String[] p1=part1.split(" ");
-				int age =Integer.parseInt(p1[1]);
+				int age =Integer.parseInt(part1);
 				
 				String par=str[6];
 				
