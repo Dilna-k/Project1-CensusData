@@ -29,21 +29,10 @@ public static class MapClass extends Mapper <LongWritable,Text,Text,Text>{
 			String record=value.toString();
 			String[] s=record.split(",");
 			
-			String[] s1=s[0].split(":");
-			String[] s2=s1[1].split(" ");
-			String age=s2[1];
+			String age=s[0];
+			String gender=s[3];
 			
-			String[] s3=s[3].split(":");
-			String[] s4=s3[1].split(" ");
-			
-			int a=s4[2].length()-1;
-			
-			//char c=s4[2].charAt(s4[2].length() - 1);
-			//System.out.print(c);
-			String s5=s4[2].substring(0,a);
-			//System.out.print(s5);
-			
-			context.write(new Text("null"), new Text(s5+","+age));
+			context.write(new Text("null"), new Text(gender+","+age));
 		}
 	}
 
@@ -64,66 +53,66 @@ public static class ReduceClass extends Reducer<Text, Text, NullWritable, Text>
 			
 			if((Age>=0)&&(Age<=12))
 			{
-				if(sex.equals("Female"))
+				if(sex.equals(" Female"))
 				{
 					male1++;
 				}
-				else if(sex.equals("Male"))
+				else if(sex.equals(" Male"))
 				{
 					female1++;
 				}
 			}
 			else if((Age>=13)&&(Age<=17))
 			{
-				if(sex.equals("Female"))
+				if(sex.equals(" Female"))
 				{
 					male2++;
 				}
-				else if(sex.equals("Male"))
+				else if(sex.equals(" Male"))
 				{
 					female2++;
 				}
 			}
 			else if((Age>=18)&&(Age<=40))
 			{
-				if(sex.equals("Female"))
+				if(sex.equals(" Female"))
 				{
 					male3++;
 				}
-				else if(sex.equals("Male"))
+				else if(sex.equals(" Male"))
 				{
 					female3++;
 				}
 			}
 			else if((Age>=41)&&(Age<=60))
 			{
-				if(sex.equals("Female"))
+				if(sex.equals(" Female"))
 				{
 					male4++;
 				}
-				else if(sex.equals("Male"))
+				else if(sex.equals(" Male"))
 				{
 					female4++;
 				}
 			}
 			else if((Age>=61)&&(Age<=80))
 			{
-				if(sex.equals("Female"))
+				if(sex.equals(" Female"))
 				{
 					male5++;
 				}
-				else if(sex.equals("Male"))
+				else if(sex.equals(" Male"))
 				{
 					female5++;
 				}
 			}
 			else if((Age>=81)&&(Age<=100))
 			{
-				if(sex.equals("Female"))
+				if(sex.equals(" Female"))
 				{
 					male6++;
 				}
-				else if(sex.equals("Male"))
+				else if(sex.equals(" Male"))
 				{
 					female6++;
 				}
