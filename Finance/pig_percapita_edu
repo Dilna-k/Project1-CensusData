@@ -1,0 +1,9 @@
+data = LOAD '/niit/censusdata/censusdata' USING PigStorage(',') AS (Age:chararray,Education:chararray,maritalstatus:chararray,gender:chararray,TaxFilerStatus:chararray,Income:chararray,Parents:chararray,CountryOfBirth:chararray,Citizenship:chararray,WeeksWorked:chararray);
+
+filtergender = FOREACH data GENERATE $1,$5;
+
+groupbyeduc = GROUP filtergender by Education;
+
+percapita = foreach groupbyeduc GENERATE group AS gender,(SUM(filtergender .$1)/COUNT(filtergender .$0)) as percapita;
+
+dump percapita;
